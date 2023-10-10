@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.text.isDigitsOnly
 import com.example.isevenapp.ui.theme.IsEvenAppTheme
+import com.example.keyboardInput.KeyboardInputScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,20 +35,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun EvenChecker(modifier: Modifier = Modifier) {
-    var text by remember { mutableStateOf("") }
 
-    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        BasicTextField(value = text, onValueChange = { text = it })
-        val n = text.toIntOrNull()
-        when {
-            n == null -> Text(text = "Not a number!!!")
-            n % 2 == 0 -> Text(text = "It's even!")
-            else -> Text(text = "It's odd((")
-        }
-    }
-}
 
 @Composable
 fun IsEvenApp() {
@@ -55,6 +43,6 @@ fun IsEvenApp() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        EvenChecker()
+        KeyboardInputScreen()
     }
 }
