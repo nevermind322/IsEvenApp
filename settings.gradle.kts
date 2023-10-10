@@ -12,8 +12,15 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("appPlugins") {
+            from(files("gradle/appPlugins.versions.toml"))
+        }
+    }
 }
 
 rootProject.name = "IsEvenApp"
 include(":app")
 include(":feature:keyboard-input")
+include(":core:data")
+include(":core:network")

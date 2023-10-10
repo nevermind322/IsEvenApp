@@ -1,6 +1,6 @@
 plugins {
-    id("isevenapp.android.library")
-    id("isevenapp.android.library.compose")
+    alias(appPlugins.plugins.isevenapp.android.library)
+    alias(appPlugins.plugins.isevenapp.android.library.compose)
 }
 
 android {
