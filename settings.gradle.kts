@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "IsEvenApp"
 include(":app")
+include(":feature:keyboard-input")
 

@@ -5,7 +5,7 @@ plugins {
 
 }
 
-group = "com.example.IsEvenApp.buildlogic"
+group = "com.example.convention"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
