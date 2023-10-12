@@ -1,5 +1,6 @@
 plugins {
     alias(appPlugins.plugins.isevenapp.android.library)
+    alias(appPlugins.plugins.isevenapp.android.hilt)
 }
 
 android {
@@ -7,4 +8,6 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.moshi)
 }

@@ -9,7 +9,7 @@ import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 const val IMPLEMENTATION = "implementation"
-
+const val KAPT = "kapt"
 internal fun Project.configureKotlinAndroid(ext: CommonExtension<*, *, *, *, *>) {
     with(ext) {
         compileSdk = 34
@@ -27,7 +27,7 @@ internal fun Project.configureKotlinAndroid(ext: CommonExtension<*, *, *, *, *>)
     }
 }
 
-internal fun Project.configureCompose(ext: CommonExtension <*,*,*, *,*> ) {
+internal fun Project.configureCompose(ext: CommonExtension<*, *, *, *, *>) {
     ext.apply {
         buildFeatures {
             compose = true
@@ -38,7 +38,7 @@ internal fun Project.configureCompose(ext: CommonExtension <*,*,*, *,*> ) {
     }
 
     dependencies {
-        add(IMPLEMENTATION, platform(librariesLibs.androidx.compose.bom))
+        IMPLEMENTATION(platform(librariesLibs.androidx.compose.bom))
     }
 }
 
