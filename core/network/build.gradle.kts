@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(libs.retrofit)
     implementation(libs.moshi)
+    implementation(project(":core:model"))
 }
