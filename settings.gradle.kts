@@ -13,8 +13,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
-        create("appPlugins") {
-            from(files("gradle/appPlugins.versions.toml"))
+        create("conventionPlugins") {
+            from(files("gradle/conventionPlugins.versions.toml"))
         }
     }
 }

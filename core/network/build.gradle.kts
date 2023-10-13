@@ -1,6 +1,6 @@
 plugins {
-    alias(appPlugins.plugins.isevenapp.android.library)
-    alias(appPlugins.plugins.isevenapp.android.hilt)
+    alias(conventionPlugins.plugins.isevenapp.android.library)
+    alias(conventionPlugins.plugins.isevenapp.android.hilt)
 }
 
 android {

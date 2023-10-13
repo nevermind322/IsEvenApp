@@ -1,5 +1,5 @@
 plugins {
-    alias(appPlugins.plugins.isevenapp.android.library)
+    alias(conventionPlugins.plugins.isevenapp.android.library)
 }
 
 android {

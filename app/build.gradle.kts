@@ -1,6 +1,6 @@
 plugins {
-    alias(appPlugins.plugins.isevenapp.android.application)
-    alias(appPlugins.plugins.isevenapp.android.application.compose)
+    alias(conventionPlugins.plugins.isevenapp.android.application)
+    alias(conventionPlugins.plugins.isevenapp.android.application.compose)
 }
 
 android {

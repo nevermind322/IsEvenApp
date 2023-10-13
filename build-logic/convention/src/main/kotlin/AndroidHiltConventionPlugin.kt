@@ -10,13 +10,13 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
 
         with(target) {
             with(pluginManager){
-                apply(librariesLibs.plugins.hilt)
-                apply(librariesLibs.plugins.kotlin.kapt)
+                apply(libs.plugins.hilt)
+                apply(libs.plugins.kotlin.kapt)
             }
 
             dependencies {
-                IMPLEMENTATION(librariesLibs.hilt)
-                KAPT(librariesLibs.hilt.compiler)
+                IMPLEMENTATION(libs.hilt)
+                KAPT(libs.hilt.compiler)
             }
 
             extensions.getByType<KaptExtension>().apply {

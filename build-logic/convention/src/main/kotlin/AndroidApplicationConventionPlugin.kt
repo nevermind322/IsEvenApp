@@ -8,8 +8,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(librariesLibs.plugins.android.application)
-                apply(librariesLibs.plugins.kotlin.android)
+                apply(libs.plugins.android.application)
+                apply(libs.plugins.kotlin.android)
             }
 
             extensions.configure<ApplicationExtension> {

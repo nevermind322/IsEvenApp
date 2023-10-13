@@ -14,25 +14,30 @@ espresso-core = "3.5.1"
 retrofit = "2.9.0"
 moshi = "1.13.0"
 hilt = "2.44"
+lifecycleViewmodelKtx = "2.6.2"
+composeNav = "2.7.4"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 
-moshi = {module =  "com.squareup.moshi:moshi-kotlin", version.ref = "moshi"}
 
-retrofit = {module =  "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit"}
+moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 
-hilt = {module = "com.google.dagger:hilt-android", version.ref = "hilt"}
-hilt-compiler = {module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt"}
+retrofit = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-graphics = { module = "  androidx.compose.ui:ui-graphics" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNav" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -43,9 +48,9 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 
-hilt = {id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
-kotlin-kapt = {id = "org.jetbrains.kotlin.kapt"}
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
 
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

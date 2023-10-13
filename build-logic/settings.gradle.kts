@@ -10,6 +10,10 @@ dependencyResolutionManagement {
         create("libs") {
             from(files("../gradle/libs.versions.toml"))
         }
+
+        create("conventionPlugins") {
+            from(files("../gradle/conventionPlugins.versions.toml"))
+        }
     }
 }
 

@@ -33,12 +33,12 @@ internal fun Project.configureCompose(ext: CommonExtension<*, *, *, *, *>) {
             compose = true
         }
         composeOptions {
-            kotlinCompilerExtensionVersion = librariesLibs.versions.composeCompiler.get()
+            kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
         }
     }
 
     dependencies {
-        IMPLEMENTATION(platform(librariesLibs.androidx.compose.bom))
+        IMPLEMENTATION(platform(libs.androidx.compose.bom))
     }
 }
 

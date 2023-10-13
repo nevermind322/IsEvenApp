@@ -8,3 +8,4 @@ isevenapp-android-library-compose = {id = "isevenapp.android.library.compose", v
 isevenapp-android-application = {id = "isevenapp.android.application", version.ref  = "pluginsVer"}
 isevenapp-android-application-compose = {id = "isevenapp.android.application.compose", version.ref  = "pluginsVer"}
 isevenapp-android-hilt = {id="isevenapp.android.hilt", version.ref = "pluginsVer"}
+isevenapp-android-feature = {id="isevenapp.android.feature", version.ref = "pluginsVer"}
