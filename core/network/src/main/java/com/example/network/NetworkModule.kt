@@ -31,7 +31,7 @@ object NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-    @Binds
+    @Provides
     @Singleton
     fun getApiService(retrofit: Retrofit): IsEvenApiService =
         retrofit.create(IsEvenApiService::class.java)

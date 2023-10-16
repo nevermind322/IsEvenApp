@@ -18,10 +18,8 @@ class ApiCall<T : Any>(private val proxy: Call<T>) : Call<ApiResult<T>> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 val result = try {
                     val body = response.body()
-                    if (response.isSuccessful && body != null)
-                        ApiResult.Success(body)
-                    else
-                        ApiResult.Error(code = response.code(), msg = response.message())
+                    if (response.isSuccessful && body != null) ApiResult.Success(body)
+                    else ApiResult.Error(code = response.code(), msg = response.message())
 
                 } catch (e: HttpException) {
                     ApiResult.Error(e.code(), e.message())
@@ -57,17 +55,15 @@ class ApiCall<T : Any>(private val proxy: Call<T>) : Call<ApiResult<T>> {
 }
 
 
-class ApiCallAdapter( private val resultType : Type) : CallAdapter<Type, Call<ApiResult<Type>>> {
-    override fun responseType(): Type  = resultType
+class ApiCallAdapter(private val resultType: Type) : CallAdapter<Type, Call<ApiResult<Type>>> {
+    override fun responseType(): Type = resultType
 
-    override fun adapt(call: Call<Type>): Call<ApiResult<Type>>  = ApiCall(call)
+    override fun adapt(call: Call<Type>): Call<ApiResult<Type>> = ApiCall(call)
 }
 
-class ApiClassAdapterFactory private constructor(): CallAdapter.Factory() {
+class ApiClassAdapterFactory private constructor() : CallAdapter.Factory() {
     override fun get(
-        returnType: Type,
-        annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        returnType: Type, annotations: Array<out Annotation>, retrofit: Retrofit
     ): CallAdapter<*, *>? {
         if (getRawType(returnType) != Call::class.java) {
             return null
