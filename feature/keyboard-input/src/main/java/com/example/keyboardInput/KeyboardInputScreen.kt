@@ -21,11 +21,11 @@ fun KeyboardInputScreen(vm: KeyboardInputViewModel = viewModel()) {
 
     Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         BasicTextField(value = text, onValueChange = { text = it; vm.isEven(text) })
-        
         when(state) {
             is KeyboardInputUiState.Success -> Text(text = if ((state as KeyboardInputUiState.Success).data.isEven) "Even!)" else "Odd(")
             is KeyboardInputUiState.Error -> Text(text = (state as KeyboardInputUiState.Error).message)
             is KeyboardInputUiState.Loading -> Text(text = "Loading")
+            is KeyboardInputUiState.Greeting -> Text(text = "Hello! Enter a  number")
         }
         
     }
