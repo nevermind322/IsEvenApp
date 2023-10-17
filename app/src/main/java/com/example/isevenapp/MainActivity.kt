@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.text.isDigitsOnly
 import com.example.isevenapp.ui.theme.IsEvenAppTheme
 import com.example.keyboardInput.KeyboardInputScreen
+import com.example.sliderInput.SliderInputScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +46,6 @@ fun IsEvenApp() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        KeyboardInputScreen()
+        SliderInputScreen()
     }
 }
