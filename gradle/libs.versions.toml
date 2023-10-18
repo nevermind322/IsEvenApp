@@ -16,6 +16,7 @@ moshi = "1.13.0"
 hilt = "2.47"
 lifecycleViewmodelKtx = "2.6.2"
 composeNav = "2.7.4"
+hiltNav= "1.0.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -31,6 +32,7 @@ retrofit = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "r
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation = {module =   "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNav"}
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
@@ -38,6 +40,7 @@ androidx-compose-ui-graphics = { module = "  androidx.compose.ui:ui-graphics" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNav" }
+
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

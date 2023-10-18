@@ -11,6 +11,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                IMPLEMENTATION(libs.hilt.navigation)
 
                 IMPLEMENTATION(libs.androidx.compose.ui)
                 IMPLEMENTATION(libs.androidx.compose.ui.graphics)
