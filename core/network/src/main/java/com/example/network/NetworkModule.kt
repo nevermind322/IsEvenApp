@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -38,11 +39,11 @@ object NetworkModule {
     @Provides
     @Singleton
     @Named(NUMBERS_API_QUALIFIER)
-    fun getNumbersApiRetrofit(moshi: Moshi): Retrofit =
+    fun getNumbersApiRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(NUMBERS_BASE_URL)
             .addCallAdapterFactory(ApiClassAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(ScalarsConverterFactory.create())
             .build()
 
     @Provides

@@ -10,5 +10,6 @@ android {
 dependencies {
     implementation(libs.retrofit)
     implementation(libs.moshi)
+    implementation(libs.retrofit.converter.scalars)
     implementation(project(":core:model"))
 }

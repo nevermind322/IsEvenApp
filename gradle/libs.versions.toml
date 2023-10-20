@@ -29,6 +29,7 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 
 retrofit = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+retrofit-converter-scalars = {module = "com.squareup.retrofit2:converter-scalars", version.ref="retrofit"   }
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
