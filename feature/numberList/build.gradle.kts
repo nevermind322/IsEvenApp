@@ -6,3 +6,8 @@ plugins {
 android {
     namespace = "com.example.listInput"
 }
+dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
+}

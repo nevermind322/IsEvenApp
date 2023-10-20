@@ -124,6 +124,6 @@ fun IsEvenNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = KEYBOARD_INPUT_ROUTE) {
         keyboardInputScreen()
         sliderInputScreen()
-        numberListScreen()
+        numberListScreen(navController)
     }
 }
