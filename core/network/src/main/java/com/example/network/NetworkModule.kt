@@ -1,5 +1,7 @@
 package com.example.network
 
+import com.example.network.even.IsEvenApiService
+import com.example.network.fact.NumbersApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
