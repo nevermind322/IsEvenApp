@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.domain.FactWithEven
 import com.example.model.NumberFact
 
 @Composable
@@ -29,11 +30,12 @@ fun NumberDetailScreen(number: Int, vm: NumberDetailViewModel = viewModel()) {
 
 
 @Composable
-fun NumberFact(fact: NumberFact) {
+fun NumberFact(fact: FactWithEven) {
 
     Column {
-        Text(text = fact.number.toString())
-        Text(text = fact.fact)
+        Text(text = fact.fact.number.toString())
+        Text(text = "Even: ${if (fact.even.isEven) "yes" else "no"}")
+        Text(text = fact.fact.fact)
     }
 
 }

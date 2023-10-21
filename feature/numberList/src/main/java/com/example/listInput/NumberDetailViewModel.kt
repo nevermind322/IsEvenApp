@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.fact.NumberFactRepository
 import com.example.model.NumberFact
 import com.example.data.RepoResult
+import com.example.domain.EvenFactUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NumberDetailViewModel @Inject constructor(private val repo: NumberFactRepository) :
+class NumberDetailViewModel @Inject constructor(private val useCase: EvenFactUseCase) :
     ViewModel() {
 
 
@@ -27,7 +28,7 @@ class NumberDetailViewModel @Inject constructor(private val repo: NumberFactRepo
         viewModelScope.launch {
             job?.cancel()
             job = viewModelScope.launch {
-                val res = repo.getFact(number, factType)
+                val res = useCase(number, factType)
                 _state.update {
                     when (res) {
                         is RepoResult.Success -> DetailScreenUiState.Success(res.data)
