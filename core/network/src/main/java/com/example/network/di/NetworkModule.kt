@@ -16,7 +16,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 const val IS_EVEN_BASE_URL = "https://api.isevenapi.xyz/api/"
-const val NUMBERS_BASE_URL = ""
+const val NUMBERS_BASE_URL = "http://numbersapi.com"
 const val IS_EVEN_API_QUALIFIER = "IsEven"
 const val NUMBERS_API_QUALIFIER = "Numbers"
 

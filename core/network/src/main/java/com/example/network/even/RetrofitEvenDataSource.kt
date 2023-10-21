@@ -1,8 +1,8 @@
-package com.example.network
+package com.example.network.even
 
-import com.example.data.NetworkEvenDataSource
+import com.example.data.even.NetworkEvenDataSource
 import com.example.data.RepoResult
-import com.example.network.even.IsEvenApiService
+import com.example.network.ApiResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

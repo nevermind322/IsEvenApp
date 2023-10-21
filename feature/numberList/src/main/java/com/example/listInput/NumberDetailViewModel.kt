@@ -2,9 +2,9 @@ package com.example.listInput
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.EvenRepository
+import com.example.data.fact.NumberFactRepository
+import com.example.model.NumberFact
 import com.example.data.RepoResult
-import com.example.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NumberDetailViewModel @Inject constructor(private val evenRepo: EvenRepository) :
+class NumberDetailViewModel @Inject constructor(private val repo: NumberFactRepository) :
     ViewModel() {
 
 
@@ -23,11 +23,11 @@ class NumberDetailViewModel @Inject constructor(private val evenRepo: EvenReposi
 
     val state = _state.asStateFlow()
 
-    fun isEven(number: Int) {
+    fun getFact(number: Int, factType: NumberFact.FactType = NumberFact.FactType.MATH) {
         viewModelScope.launch {
             job?.cancel()
             job = viewModelScope.launch {
-                val res = evenRepo.isEven(number)
+                val res = repo.getFact(number, factType)
                 _state.update {
                     when (res) {
                         is RepoResult.Success -> DetailScreenUiState.Success(res.data)

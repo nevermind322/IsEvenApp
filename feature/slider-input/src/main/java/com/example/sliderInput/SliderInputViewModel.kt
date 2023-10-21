@@ -2,7 +2,7 @@ package com.example.sliderInput
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.EvenRepository
+import com.example.data.even.EvenRepository
 import com.example.data.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

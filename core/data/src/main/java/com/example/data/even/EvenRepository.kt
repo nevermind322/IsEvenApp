@@ -1,4 +1,4 @@
-package com.example.data
+package com.example.data.even
 
 import javax.inject.Inject
 import javax.inject.Singleton
