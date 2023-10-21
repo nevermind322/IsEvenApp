@@ -2,6 +2,7 @@ package com.example.network
 
 import com.example.data.NetworkEvenDataSource
 import com.example.data.RepoResult
+import com.example.network.even.IsEvenApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

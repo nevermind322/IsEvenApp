@@ -3,6 +3,7 @@ package com.example.listInput
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.EvenRepository
+import com.example.data.RepoResult
 import com.example.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -29,15 +30,10 @@ class NumberDetailViewModel @Inject constructor(private val evenRepo: EvenReposi
                 val res = evenRepo.isEven(number)
                 _state.update {
                     when (res) {
-                        is ApiResult.Success -> DetailScreenUiState.Success(res.data)
-                        is ApiResult.Error -> DetailScreenUiState.Error(res.msg)
-                        is ApiResult.Exception -> DetailScreenUiState.Error(
-                            res.e.message ?: "Unknown error!"
-                        )
-
+                        is RepoResult.Success -> DetailScreenUiState.Success(res.data)
+                        is RepoResult.Error -> DetailScreenUiState.Error(res.msg)
                     }
                 }
-
             }
         }
     }
