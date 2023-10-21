@@ -1,16 +1,13 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(conventionPlugins.plugins.isevenapp.android.library)
     alias(conventionPlugins.plugins.isevenapp.android.hilt)
 }
 
 android {
-    namespace = "com.example.network"
+    namespace = "com.example.domain"
 }
-
 dependencies {
-    implementation(libs.retrofit)
-    implementation(libs.moshi)
-    implementation(libs.retrofit.converter.scalars)
-    implementation(project(":core:model"))
     implementation(project(":core:data"))
+    implementation(project(":core:model"))
 }

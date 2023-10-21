@@ -38,6 +38,8 @@ dependencies {
 
     implementation(project(":feature:keyboard-input"))
     implementation(project(":feature:slider-input"))
+    implementation(project(":feature:numberList"))
+
     implementation(project(":core:di"))
 
 

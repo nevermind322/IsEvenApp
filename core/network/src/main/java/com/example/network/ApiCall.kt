@@ -31,7 +31,7 @@ class ApiCall<T : Any>(private val proxy: Call<T>) : Call<ApiResult<T>> {
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                val res = ApiResult.Exception<T>(t)
+                val res = ApiResult.Exception(t)
                 callback.onResponse(this@ApiCall, Response.success(res))
             }
 

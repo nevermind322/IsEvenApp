@@ -1,7 +1,7 @@
-package com.example.network
+package com.example.network.even
 
 import com.example.model.IsEven
-import retrofit2.Response
+import com.example.network.ApiResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 
