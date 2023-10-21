@@ -3,7 +3,7 @@ package com.example.keyboardInput
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.EvenRepository
-import com.example.network.ApiResult
+import com.example.data.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,12 +36,8 @@ class KeyboardInputViewModel @Inject constructor(private val evenRepo: EvenRepos
                     val res = evenRepo.isEven(n)
                     _state.update {
                         when (res) {
-                            is ApiResult.Success -> KeyboardInputUiState.Success(res.data)
-                            is ApiResult.Error -> KeyboardInputUiState.Error(res.msg)
-                            is ApiResult.Exception -> KeyboardInputUiState.Error(
-                                res.e.message ?: "Unknown error!"
-                            )
-
+                            is RepoResult.Success -> KeyboardInputUiState.Success(res.data)
+                            is RepoResult.Error -> KeyboardInputUiState.Error(res.msg)
                         }
                     }
                 }

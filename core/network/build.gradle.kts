@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.retrofit.converter.scalars)
     implementation(project(":core:model"))
+    implementation(project(":core:data"))
 }

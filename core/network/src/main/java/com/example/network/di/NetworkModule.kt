@@ -1,7 +1,7 @@
-package com.example.network
+package com.example.network.di
 
-import com.example.network.even.IsEvenApiService
-import com.example.network.fact.NumbersApiService
+import com.example.network.ApiClassAdapterFactory
+import com.example.network.IsEvenApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -22,6 +22,7 @@ const val NUMBERS_API_QUALIFIER = "Numbers"
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
     @Singleton
     fun getMoshi(): Moshi = Moshi.Builder()
