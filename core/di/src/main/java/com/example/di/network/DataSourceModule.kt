@@ -1,4 +1,4 @@
-package com.example.network.di
+package com.example.di.network
 
 import com.example.data.NetworkEvenDataSource
 import com.example.network.RetrofitEvenDataSource

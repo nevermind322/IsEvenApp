@@ -38,6 +38,8 @@ dependencies {
 
     implementation(project(":feature:keyboard-input"))
     implementation(project(":feature:slider-input"))
+    implementation(project(":core:di"))
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
