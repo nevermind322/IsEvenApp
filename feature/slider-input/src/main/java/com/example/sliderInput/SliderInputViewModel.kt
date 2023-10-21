@@ -3,7 +3,7 @@ package com.example.sliderInput
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.EvenRepository
-import com.example.network.ApiResult
+import com.example.data.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,9 +26,8 @@ class SliderInputViewModel @Inject constructor(private val repo: EvenRepository)
             val res = repo.isEven(number)
             _state.update {
                 when (res) {
-                    is ApiResult.Success -> SliderInputScreenState.Success(res.data)
-                    is ApiResult.Error -> SliderInputScreenState.Error(res.msg)
-                    is ApiResult.Exception -> SliderInputScreenState.Error(res.e.message ?: "Unknown error")
+                    is RepoResult.Success -> SliderInputScreenState.Success(res.data)
+                    is RepoResult.Error -> SliderInputScreenState.Error(res.msg)
                 }
             }
         }

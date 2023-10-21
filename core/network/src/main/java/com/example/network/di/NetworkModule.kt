@@ -1,8 +1,9 @@
-package com.example.network
+package com.example.network.di
 
+import com.example.network.ApiClassAdapterFactory
+import com.example.network.IsEvenApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,10 +13,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 const val BASE_URL = "https://api.isevenapi.xyz/api/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
     @Singleton
     fun getMoshi(): Moshi = Moshi.Builder()
