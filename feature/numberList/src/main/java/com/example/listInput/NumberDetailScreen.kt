@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.domain.FactWithEven
 import com.example.model.NumberFact
@@ -18,7 +17,7 @@ fun NumberDetailScreen(number: Int, vm: NumberDetailViewModel = viewModel()) {
     val state by vm.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        vm.getFact(number)
+        vm.getFact(number, NumberFact.FactType.getRandomTypeExceptDate())
     }
 
     when (state) {
