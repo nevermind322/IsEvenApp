@@ -1,10 +1,15 @@
 package com.example.network.di
 
+import com.example.network.even.NetworkEvenDataSource
+import com.example.network.fact.NetworkFactDatasource
 import com.example.network.ApiClassAdapterFactory
 import com.example.network.even.IsEvenApiService
+import com.example.network.even.RetrofitEvenDataSource
 import com.example.network.fact.NumbersApiService
+import com.example.network.fact.RetrofitFactDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,5 +64,17 @@ object NetworkModule {
     @Singleton
     fun getApiService(@Named(IS_EVEN_API_QUALIFIER) retrofit: Retrofit): IsEvenApiService =
         retrofit.create(IsEvenApiService::class.java)
+
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+interface NetworkDataSourceModule {
+
+    @Binds
+    fun getFactDataSource(impl : RetrofitFactDataSource) : NetworkFactDatasource
+
+    @Binds
+    fun getEvenDataSource( impl : RetrofitEvenDataSource) : NetworkEvenDataSource
 
 }

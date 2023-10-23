@@ -40,7 +40,6 @@ dependencies {
     implementation(project(":feature:slider-input"))
     implementation(project(":feature:numberList"))
 
-    implementation(project(":core:di"))
 
 
     implementation(libs.androidx.core.ktx)
