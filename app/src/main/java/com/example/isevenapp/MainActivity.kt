@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.drawInput.drawInputScreen
+import com.example.drawInput.navigateToDrawInput
 import com.example.isevenapp.ui.theme.IsEvenAppTheme
 import com.example.keyboardInput.KEYBOARD_INPUT_ROUTE
 import com.example.keyboardInput.keyboardInputScreen
@@ -67,7 +69,11 @@ fun IsEvenApp(navController: NavHostController = rememberNavController()) {
         },
         "List" to {
             navController.navigateToNumberListScreen()
-            scope.launch { drawerState. close()}
+            scope.launch { drawerState.close() }
+        },
+        "Draw" to {
+            navController.navigateToDrawInput()
+            scope.launch { drawerState.close() }
         }
     )
 
@@ -125,5 +131,6 @@ fun IsEvenNavHost(navController: NavHostController) {
         keyboardInputScreen()
         sliderInputScreen()
         numberListScreen(navController)
+        drawInputScreen()
     }
 }
