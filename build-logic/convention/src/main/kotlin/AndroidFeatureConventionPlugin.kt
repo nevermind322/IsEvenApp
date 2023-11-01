@@ -15,11 +15,12 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
                 IMPLEMENTATION(libs.androidx.compose.ui)
                 IMPLEMENTATION(libs.androidx.compose.ui.graphics)
-                IMPLEMENTATION(libs.androidx.compose.ui.tooling.preview)
                 IMPLEMENTATION(libs.androidx.compose.material3)
                 IMPLEMENTATION(libs.androidx.compose.navigation)
 
-                IMPLEMENTATION(libs.androidx.lifecycle.viewmodel.ktx)
+                DEBUG_IMPLEMENTATION(libs.androidx.compose.ui.tooling)
+                DEBUG_IMPLEMENTATION(libs.androidx.compose.ui.tooling.preview)
+
                 IMPLEMENTATION(libs.androidx.lifecycle.viewmodel.ktx)
             }
         }

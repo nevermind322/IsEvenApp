@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 const val IMPLEMENTATION = "implementation"
 const val KAPT = "kapt"
+const val DEBUG_IMPLEMENTATION = "debugImplementation"
 internal fun Project.configureKotlinAndroid(ext: CommonExtension<*, *, *, *, *>) {
     with(ext) {
         compileSdk = 34

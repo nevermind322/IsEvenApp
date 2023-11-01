@@ -1,5 +1,4 @@
 plugins {
-
     alias(conventionPlugins.plugins.isevenapp.android.feature)
 }
 
