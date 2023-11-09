@@ -5,7 +5,6 @@ import android.graphics.Paint
 import android.graphics.Picture
 import android.os.Build
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -16,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,13 +29,13 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.asAndroidPath
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.record
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlin.math.roundToInt
 
 @Composable
@@ -75,13 +75,12 @@ private enum class MotionEvent() {
 }
 
 @Composable
-fun DrawCanvas() {
+fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
     val filter = PointerEventType.Move
     var offset by remember { mutableStateOf(Offset.Unspecified) }
     var path by remember { mutableStateOf(Path()) }
     var motionEvent by remember { mutableStateOf(MotionEvent.Idle) }
-
-    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
+    val state by vm.state.collectAsState()
 
     var width = remember { 0 }
     var height = remember { 0 }
@@ -100,7 +99,7 @@ fun DrawCanvas() {
             paint.color = Color.Green.toArgb()
             paint.strokeWidth = 8f
             picture.record(width, height) { drawPath(path.asAndroidPath(), paint) }
-            bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 Bitmap.createBitmap(picture)
             } else Bitmap.createBitmap(
                 picture.width, picture.height, Bitmap.Config.ARGB_8888
@@ -109,10 +108,12 @@ fun DrawCanvas() {
                 canvas.drawColor(android.graphics.Color.WHITE)
                 canvas.drawPicture(picture)
             }
+            vm.classify(bitmap)
+
         }) {
             Text(text = "save")
         }
-        if (bitmap != null) Image(bitmap = bitmap!!.asImageBitmap(), contentDescription = "hui")
+        if (state != -1) Text(text = state.toString())
         else Canvas(modifier = Modifier
             .fillMaxSize()
             .pointerInput(filter) {
