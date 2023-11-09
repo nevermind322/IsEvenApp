@@ -4,11 +4,15 @@ plugins {
     alias(conventionPlugins.plugins.isevenapp.android.hilt)
 }
 
+
 android {
-    namespace = "com.example.domain"
+    namespace = "com.example.digitClassifier"
+    androidResources {
+        noCompress.add("tflite")
+    }
 }
+
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:model"))
-    implementation(project(":core:digit-classifier"))
+    implementation("org.tensorflow:tensorflow-lite:2.5.0")
+
 }

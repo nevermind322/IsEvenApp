@@ -4,4 +4,9 @@ plugins {
 
 android {
     namespace = "com.example.drawInput"
+
+}
+
+dependencies {
+    implementation(project(":core:domain"))
 }
