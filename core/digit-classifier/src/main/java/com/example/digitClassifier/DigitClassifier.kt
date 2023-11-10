@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.util.Log
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.tensorflow.lite.Interpreter
@@ -14,8 +14,10 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class DigitClassifier @Inject constructor(@ActivityContext private val context: Context) {
+@Singleton
+class DigitClassifier @Inject constructor(@ApplicationContext private val context: Context) {
     // TODO: Add a TF Lite interpreter as a field.
     private var interpreter: Interpreter? = null
     var isInitialized = false
@@ -65,6 +67,8 @@ class DigitClassifier @Inject constructor(@ActivityContext private val context: 
         }
 
     suspend fun classify(bitmap: Bitmap): Int {
+        Log.d("classifier", "classifier classify")
+
         if (!isInitialized) initializeInterpreter()
 
         // TODO: Add code to run inference with TF Lite.
@@ -86,6 +90,7 @@ class DigitClassifier @Inject constructor(@ActivityContext private val context: 
         // Post-processing: find the digit that has the highest probability
         // and return it a human-readable string.
         val result = output[0]
+        Log.d("classifier", "result is ${result.indices.maxByOrNull { result[it] } ?: -1}")
         return result.indices.maxByOrNull { result[it] } ?: -1
     }
 

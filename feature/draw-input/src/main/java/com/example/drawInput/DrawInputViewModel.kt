@@ -1,6 +1,7 @@
 package com.example.drawInput
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.RepoResult
@@ -18,18 +19,23 @@ class DrawInputViewModel @Inject constructor(private val useCase: ClassifyEvenUs
     val state = MutableStateFlow(-1)
 
     fun classify(bitmap: Bitmap) {
-        viewModelScope.launch {
+        Log.d(TAG, "VM classify ")
 
+        viewModelScope.launch {
             val res = useCase(bitmap)
+            Log.d(TAG, "got res ${res::class}")
             state.update {
-                when (res)
-                {
+                when (res) {
                     is RepoResult.Success -> res.data.number
-                    else -> -1
+                    is RepoResult.Error -> {
+                        Log.d(TAG, "got error ${res.msg}")
+
+                        -3
+                    }
                 }
             }
-
         }
-    }
 
+    }
 }
+

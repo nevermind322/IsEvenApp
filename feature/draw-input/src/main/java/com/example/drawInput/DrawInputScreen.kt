@@ -3,7 +3,7 @@ package com.example.drawInput
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Picture
-import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.record
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlin.math.roundToInt
+
+internal const val TAG = "classifier"
 
 @Composable
 fun DrawInputScreen() {
@@ -99,15 +101,14 @@ fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
             paint.color = Color.Green.toArgb()
             paint.strokeWidth = 8f
             picture.record(width, height) { drawPath(path.asAndroidPath(), paint) }
-            val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                Bitmap.createBitmap(picture)
-            } else Bitmap.createBitmap(
+            val bitmap =  Bitmap.createBitmap(
                 picture.width, picture.height, Bitmap.Config.ARGB_8888
             ).also {
                 val canvas = android.graphics.Canvas(it)
                 canvas.drawColor(android.graphics.Color.WHITE)
                 canvas.drawPicture(picture)
             }
+            Log.d(TAG, "clicked button ")
             vm.classify(bitmap)
 
         }) {
