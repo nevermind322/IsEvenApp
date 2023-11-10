@@ -3,16 +3,15 @@ package com.example.drawInput
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Picture
-import android.util.Log
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,7 +30,6 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.record
@@ -41,33 +39,23 @@ import kotlin.math.roundToInt
 internal const val TAG = "classifier"
 
 @Composable
-fun DrawInputScreen() {
-    Column {
-        LogPointerEvents(PointerEventType.Move)
-        DrawCanvas()
-    }
-}
+fun DrawInputScreen(vm: DrawInputViewModel = hiltViewModel()) {
 
-@Composable
-private fun LogPointerEvents(filter: PointerEventType? = null) {
-    var log by remember { mutableStateOf("") }
+    val state by vm.state.collectAsState()
     Column {
-        Text(log)
-        Box(
-            Modifier
-                .size(100.dp)
-                .background(Color.Red)
-                .pointerInput(filter) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            // handle pointer event
-                            if (filter == null || event.type == filter) {
-                                log = "${event.type}, ${event.changes.first().position}"
-                            }
-                        }
-                    }
-                })
+
+
+        DrawCanvas { vm.classify(it) }
+
+        when (state) {
+            DrawInputScreenUiState.Loading -> CircularProgressIndicator()
+            is DrawInputScreenUiState.Error -> Text(text = (state as DrawInputScreenUiState.Error).msg)
+            DrawInputScreenUiState.Greeting -> Text("Hello, please draw a number")
+            is DrawInputScreenUiState.Success -> {
+                val res = (state as DrawInputScreenUiState.Success).data
+                Text(text = "Number is ${res.number} and it is ${if (res.isEven.isEven) "even" else "odd"}")
+            }
+        }
     }
 }
 
@@ -77,18 +65,16 @@ private enum class MotionEvent() {
 }
 
 @Composable
-fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
-    val filter = PointerEventType.Move
+fun DrawCanvas(classify: (Bitmap) -> Unit) {
+
     var offset by remember { mutableStateOf(Offset.Unspecified) }
     var path by remember { mutableStateOf(Path()) }
     var motionEvent by remember { mutableStateOf(MotionEvent.Idle) }
-    val state by vm.state.collectAsState()
 
     var width = remember { 0 }
     var height = remember { 0 }
 
     Column {
-
         Button(onClick = {
             path = Path()
             offset = Offset.Unspecified
@@ -99,25 +85,21 @@ fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
             val paint = Paint()
             paint.style = Paint.Style.STROKE
             paint.color = Color.Green.toArgb()
-            paint.strokeWidth = 8f
+            paint.strokeWidth = 10f
             picture.record(width, height) { drawPath(path.asAndroidPath(), paint) }
-            val bitmap =  Bitmap.createBitmap(
-                picture.width, picture.height, Bitmap.Config.ARGB_8888
-            ).also {
-                val canvas = android.graphics.Canvas(it)
-                canvas.drawColor(android.graphics.Color.WHITE)
-                canvas.drawPicture(picture)
-            }
-            Log.d(TAG, "clicked button ")
-            vm.classify(bitmap)
+            val bitmap = Bitmap.createBitmap(picture.width, picture.height, Bitmap.Config.ARGB_8888)
 
-        }) {
-            Text(text = "save")
-        }
-        if (state != -1) Text(text = state.toString())
-        else Canvas(modifier = Modifier
-            .fillMaxSize()
-            .pointerInput(filter) {
+            val canvas = android.graphics.Canvas(bitmap)
+            canvas.drawColor(android.graphics.Color.WHITE)
+            canvas.drawPicture(picture)
+
+            classify(bitmap)
+        }) { Text(text = "save") }
+
+        Canvas(modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+            .pointerInput(Unit) {
                 awaitEachGesture {
                     awaitFirstDown().also {
                         motionEvent = MotionEvent.Down
@@ -135,11 +117,10 @@ fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
                     } while (event.changes.any { it.pressed })
                     motionEvent = MotionEvent.Up
                 }
-            }, onDraw = {
-
+            }
+            .border(2.dp, Color.Red)) {
             width = this.size.width.roundToInt()
             height = this.size.height.roundToInt()
-
             when (motionEvent) {
                 MotionEvent.Idle -> Unit
                 MotionEvent.Move -> {
@@ -158,6 +139,6 @@ fun DrawCanvas(vm: DrawInputViewModel = hiltViewModel()) {
                     width = 8.dp.toPx(), join = StrokeJoin.Round, cap = StrokeCap.Round
                 )
             )
-        })
+        }
     }
 }
