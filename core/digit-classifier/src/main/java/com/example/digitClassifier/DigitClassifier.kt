@@ -16,6 +16,8 @@ import java.nio.channels.FileChannel
 import javax.inject.Inject
 import javax.inject.Singleton
 
+const val MODEL_NAME = "mnist2.tflite"
+
 @Singleton
 class DigitClassifier @Inject constructor(@ApplicationContext private val context: Context) {
     // TODO: Add a TF Lite interpreter as a field.
@@ -36,7 +38,7 @@ class DigitClassifier @Inject constructor(@ApplicationContext private val contex
 
         // Load the TF Lite model from asset folder and initialize TF Lite Interpreter with NNAPI enabled.
         val assetManager = context.assets
-        val model = loadModelFile(assetManager, "mnist.tflite")
+        val model = loadModelFile(assetManager, MODEL_NAME)
         val _interpreter = Interpreter(model)
 
         // TODO: Read the model input shape from model file.
@@ -90,7 +92,8 @@ class DigitClassifier @Inject constructor(@ApplicationContext private val contex
         // Post-processing: find the digit that has the highest probability
         // and return it a human-readable string.
         val result = output[0]
-        Log.d("classifier", "result is ${result.indices.maxByOrNull { result[it] } ?: -1}")
+
+        Log.d("classifier", "result is ${result.toList()}")
         return result.indices.maxByOrNull { result[it] } ?: -1
     }
 
